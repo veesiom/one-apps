@@ -1,0 +1,10 @@
+DISTROS := alpine316 alpine317 debian11 debian12
+
+# URLS
+URL_alpine316 ?= https://dl-cdn.alpinelinux.org/alpine/v3.16/releases/x86_64/alpine-virt-3.16.7-x86_64.iso
+URL_alpine317 ?= https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/x86_64/alpine-virt-3.17.5-x86_64.iso
+URL_debian11  ?= https://cdimage.debian.org/cdimage/cloud/bullseye/latest/debian-11-generic-amd64.qcow2
+URL_debian11  ?= https://cdimage.debian.org/cdimage/cloud/bullseye/latest/debian-11-generic-amd64.qcow2
+URL_debian12   ?= https://cdimage.debian.org/cdimage/cloud/bookworm/latest/debian-12-generic-amd64.qcow2
+
+

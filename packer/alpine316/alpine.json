@@ -1,0 +1,45 @@
+{
+  "variables": {
+    "appliance_name": "alpine",
+    "product_arch": "amd64",
+    "serial": "stdio",
+    "shutdown_command": "poweroff"
+  },
+  "builders": [
+    {
+      "type": "qemu",
+      "name": "qemu",
+      "accelerator": "kvm",
+      "headless": false,
+      "disk_size": 256,
+      "output_directory": "{{ user `output_dir` }}",
+      "format": "qcow2",
+      "iso_url": "{{ user `alpine_base_image` }}",
+	  "iso_checksum": "none",
+      "ssh_username": "root",
+      "ssh_password": "B3lWXnhu1Q5Get61tcct",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "300s",
+      "shutdown_command": "{{user `shutdown_command`}}",
+      "http_directory": "{{user `http_dir`}}",
+      "net_device": "virtio-net",
+      "disk_interface": "virtio",
+      "vm_name": "{{ user `appliance_name` }}",
+      "boot_wait": "10s",
+      "boot_command": [
+        "root<enter>",
+        "ifconfig eth0 up && udhcpc -i eth0<enter><wait1>",
+
+        "wget -qO alpine.sh http://{{.HTTPIP}}:{{.HTTPPort}}/alpine.sh<enter><wait1>",
+
+        "/bin/ash alpine.sh<enter><wait20>"
+      ],
+      "qemu_binary": "{{ user `qemu_binary`}}",
+      "qemuargs": [
+            [ "-m", "1G" ],
+            [ "-serial", "{{ user `serial` }}" ],
+            ["-cpu", "host"]
+      ]
+    }
+  ]
+}
